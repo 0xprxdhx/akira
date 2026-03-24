@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Installing AKIRA..."
+echo "🚀 Installing rexa..."
 
 # Update system
 sudo apt update
@@ -10,11 +10,11 @@ echo "[+] Installing system dependencies..."
 sudo apt install -y python3 python3-venv nmap nikto gobuster seclists dirb
 
 # Setup project directory
-PROJECT_DIR="$HOME/akira"
+PROJECT_DIR="$HOME/rexa"
 
 if [ ! -d "$PROJECT_DIR" ]; then
-    echo "[+] Cloning AKIRA..."
-    git clone https://github.com/0xprxdhx/akira.git "$PROJECT_DIR"
+    echo "[+] Cloning rexa..."
+    git clone https://github.com/0xprxdhx/rexa.git "$PROJECT_DIR"
 fi
 
 cd "$PROJECT_DIR"
@@ -29,16 +29,16 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 # Create launcher
-echo "[+] Creating command 'akira'..."
-sudo bash -c "cat > /usr/local/bin/akira" <<EOL
+echo "[+] Creating command 'rexa'..."
+sudo bash -c "cat > /usr/local/bin/rexa" <<EOL
 #!/bin/bash
 PROJECT_DIR="$PROJECT_DIR"
 exec \$PROJECT_DIR/venv/bin/python \$PROJECT_DIR/main.py "\$@"
 EOL
 
-sudo chmod +x /usr/local/bin/akira
+sudo chmod +x /usr/local/bin/rexa
 
 echo ""
-echo "✅ AKIRA installed successfully!"
-echo "👉 Run with: akira"
-echo "👉 Or with root: sudo akira"
+echo "✅ rexa installed successfully!"
+echo "👉 Run with: rexa"
+echo "👉 Or with root: sudo rexa"

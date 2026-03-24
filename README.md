@@ -1,248 +1,293 @@
+<div align="center">
+
 ```
- █████╗ ██╗  ██╗██╗██████╗  █████╗ 
-██╔══██╗██║ ██╔╝██║██╔══██╗██╔══██╗
-███████║█████╔╝ ██║██████╔╝███████║
-██╔══██║██╔═██╗ ██║██╔══██╗██╔══██║
-██║  ██║██║  ██╗██║██║  ██║██║  ██║
-╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
-                                   
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░                                                           ░
+░    ▄▀█ █▄▀ █ █▀█ ▄▀█                                     ░
+░    █▀█ █░█ █ █▀▄ █▀█                                     ░
+░                                                           ░
+░    guided penetration testing cli                         ░
+░    recon · web assessment · ethical hacking               ░
+░                                                           ░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 ```
-> *Guided penetration testing CLI for ethical hacking, recon, and web assessment.*
+
+<br/>
+
+![Python](https://img.shields.io/badge/Python-3.x-red?style=flat-square&labelColor=111&color=cc0000)
+![License](https://img.shields.io/badge/License-MIT-red?style=flat-square&labelColor=111&color=cc0000)
+![Platform](https://img.shields.io/badge/Platform-Linux-red?style=flat-square&labelColor=111&color=cc0000)
+![Status](https://img.shields.io/badge/Status-Active-red?style=flat-square&labelColor=111&color=cc0000)
+
+<br/>
+
+> **rexa** is a Python-based interactive CLI that combines **Nmap**, **Nikto**, and **Gobuster**  
+> into one clean, guided penetration testing workflow — built for clarity, power, and reporting.
+
+<br/>
+
+</div>
 
 ---
 
-```
-[ TARGET ACQUIRED ]  [ SCAN INITIATED ]  [ REPORT GENERATED ]
-```
+## `>` What is rexa?
+
+rexa automates the early stages of penetration testing and reconnaissance. It wraps three industry-standard tools into a single guided workflow — ideal for both beginners learning the ropes and professionals who want faster, structured output.
+
+No more juggling flags across three terminals. rexa does it with you, step by step.
 
 ---
 
-## What is AKIRA?
-
-AKIRA is a Python-based, interactive CLI security tool that combines **Nmap**, **Nikto**, and **Gobuster** into a guided workflow designed for cybersecurity learners, bug bounty hunters, and ethical hackers.
-
-It simplifies reconnaissance by making scan choices easier to understand, while still supporting advanced options, root mode, and structured output.
-
----
-
-## Features
+## `>` Features
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    AKIRA CAPABILITIES                   │
-├─────────────────────────────────────────────────────────┤
-│  ◈  Interactive, beginner-friendly CLI                  │
-│  ◈  Metasploit-inspired terminal experience             │
-│  ◈  Root-aware scanning support                         │
-│  ◈  Custom Nmap flags and scan speed selection          │
-│  ◈  Automatic discovery of web targets                  │
-│  ◈  Nikto integration for web vulnerability checks      │
-│  ◈  Gobuster integration for directory enumeration      │
-│  ◈  Recursive Gobuster mode                             │
-│  ◈  Structured scan output in JSON                      │
-│  ◈  Markdown report generation                          │
-│  ◈  Clear explanations and usage hints throughout       │
-└─────────────────────────────────────────────────────────┘
-```
+[ CORE ]
+  ✦  Interactive CLI with a clean terminal experience
+  ✦  Metasploit-inspired banner and guided prompts
+  ✦  Root-aware scanning support
+  ✦  Beginner-friendly guidance at each step
+  ✦  Works in both normal and root mode
 
-### Nmap Profile Selection
+[ NMAP ]
+  ✦  Quick / Balanced / Full / Custom scan profiles
+  ✦  Custom feature selection (SYN, OS detection, aggressive, traceroute)
+  ✦  Scan speed selection
+  ✦  Port strategies — top ports, all ports, web ports, custom range
 
-| Profile  | Description                          |
-|----------|--------------------------------------|
-| Quick    | Fast scan of common ports            |
-| Balanced | Service detection with moderate speed|
-| Full     | Complete scan with all features      |
-| Custom   | Define your own flags and options    |
+[ WEB ]
+  ✦  Automatic web service detection
+  ✦  Nikto integration for vulnerability checks
+  ✦  Gobuster directory and file enumeration
+  ✦  Wordlist selection & recursive mode
+  ✦  Status code filtering
 
-### Port Strategy Options
-
-| Strategy       | Description                        |
-|----------------|------------------------------------|
-| Default        | Top ports (fastest)                |
-| All Ports      | Full range 1–65535                 |
-| Web Ports      | 80, 443, 8080, 8443, etc.          |
-| Custom Range   | Define your own range              |
-
----
-
-## What AKIRA Does
-
-AKIRA automates the early stages of penetration testing and reconnaissance.
-
-```
-  [1] Scan a target with Nmap
-       └─► [2] Identify open, closed, and filtered ports
-                └─► [3] Detect services and service versions
-                         └─► [4] Detect web services automatically
-                                  └─► [5] Run Nikto against web targets
-                                           └─► [6] Run Gobuster with chosen wordlist
-                                                    └─► [7] Save results for review
+[ OUTPUT ]
+  ✦  Structured JSON output
+  ✦  Markdown report generation
+  ✦  Summary file for quick review
 ```
 
 ---
 
-## Installation
+## `>` How It Works
 
-### 1. Clone the repository
+rexa strings together three tools into one coherent workflow:
+
+```
+  TARGET INPUT
+       │
+       ▼
+  ┌─────────┐     discovers hosts, ports, services
+  │  NMAP   │ ──────────────────────────────────────────────────────┐
+  └─────────┘                                                       │
+       │                                                            │
+       ▼  (web service detected?)                                   │
+  ┌─────────┐     checks web servers for common vulnerabilities     │
+  │  NIKTO  │ ──────────────────────────────────────────────────────┤
+  └─────────┘                                                       │
+       │                                                            │
+       ▼                                                            │
+  ┌──────────┐    enumerates hidden directories and files           │
+  │ GOBUSTER │ ──────────────────────────────────────────────────────┤
+  └──────────┘                                                       │
+       │                                                            │
+       ▼                                                            ▼
+  ┌──────────────────────────────────────────────────────────────────┐
+  │              results/   →   JSON + Markdown + Summary            │
+  └──────────────────────────────────────────────────────────────────┘
+```
+
+> Root mode unlocks advanced Nmap features: SYN scan, OS detection, aggressive mode, traceroute.
+
+---
+
+## `>` Installation
+
+### 1 — Clone the repository
 
 ```bash
-git clone https://github.com/0xprxdhx/akira.git
-cd akira
+git clone https://github.com/0xprxdhx/rexa.git
+cd rexa
 ```
 
-### 2. Create and activate a virtual environment
+### 2 — Create a virtual environment
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Install Python dependencies
+### 3 — Install Python dependencies
 
 ```bash
-pip install python-nmap rich
+pip install -r requirements.txt
 ```
 
-### 4. Install system tools
-
-On Parrot OS / Debian-based systems:
+### 4 — Install system tools
 
 ```bash
 sudo apt update
-sudo apt install nmap nikto gobuster seclists dirb -y
+sudo apt install -y nmap nikto gobuster seclists dirb
+```
+
+### 5 — Install rexa as a command
+
+```bash
+chmod +x install.sh
+./install.sh
+```
+
+After installation, launch with:
+
+```bash
+rexa          # normal mode
+sudo rexa     # root mode (recommended)
 ```
 
 ---
 
-## Usage
+## `>` Usage
 
-### Run in normal mode
-
-```bash
-akira
-```
-
-### Run in root mode for full Nmap features
+### Normal mode
 
 ```bash
-sudo akira
+rexa
 ```
 
-> **Root mode** enables Nmap features such as SYN scan, OS detection, aggressive mode, and traceroute.
+### Root mode
 
-### Workflow
+```bash
+sudo rexa
+```
 
-AKIRA guides you step by step:
+Root mode is recommended for SYN scanning, OS detection, aggressive mode, and traceroute.
+
+---
+
+## `>` Scan Workflow
+
+rexa guides you through 10 steps — no flags to memorize:
 
 ```
-  [1]  Enter a target
-  [2]  Choose a scan profile
-  [3]  Pick Nmap features, speed, and ports
-  [4]  Run the scan
-  [5]  Review results
-  [6]  Choose whether to run Nikto
-  [7]  Choose whether to run Gobuster
-  [8]  Save results and generate a report
+  01  Enter a target
+  02  Choose a scan profile
+  03  Select scan features
+  04  Choose scan speed
+  05  Choose port strategy
+  06  Review the scan plan
+  07  Run Nmap
+  08  Choose whether to run Nikto
+  09  Choose whether to run Gobuster
+  10  Save results and generate report
 ```
 
 ---
 
-## Output
+## `>` Gobuster Wordlists
 
-AKIRA stores all results in the `results/` folder:
+rexa supports six wordlist options out of the box:
+
+| # | Wordlist | Use Case |
+|---|----------|----------|
+| 1 | `dirb/common.txt` | Fast common directory scan |
+| 2 | `dirbuster/directory-list-2.3-medium.txt` | Medium-depth enumeration |
+| 3 | `SecLists/Discovery/Web-Content/common.txt` | SecLists common |
+| 4 | `SecLists/.../raft-small-words.txt` | Raft small |
+| 5 | `SecLists/.../raft-medium-words.txt` | Raft medium (thorough) |
+| 6 | Custom path | Bring your own wordlist |
+
+---
+
+## `>` Output Files
+
+All results are saved inside the `results/` folder:
 
 ```
 results/
-├── nmap_output.json
-├── nikto_output.json
-├── gobuster_output.json
-├── session.json
-└── report.md
+├── nmap_output.json       ← port and service data
+├── nikto_output.json      ← web vulnerability findings
+├── gobuster_output.json   ← directory enumeration results
+├── session.json           ← full session data
+├── report.md              ← human-readable markdown report
+└── summary.txt            ← quick overview
 ```
 
 ---
 
-## Project Structure
+## `>` Project Structure
 
 ```
-akira/
+rexa/
 ├── main.py
+├── install.sh
+├── requirements.txt
+├── README.md
+├── LICENSE
 ├── scanner/
 │   ├── nmap_scan.py
 │   ├── nikto_scan.py
 │   └── gobuster_scan.py
 ├── results/
-├── venv/
-└── README.md
+└── venv/
 ```
 
 ---
 
-## Supported Tools
+## `>` Planned Improvements
 
 ```
-┌──────────────┬────────────────────────────────────────────┐
-│  Tool        │  Purpose                                   │
-├──────────────┼────────────────────────────────────────────┤
-│  Nmap        │  Port scanning, service & OS detection     │
-│  Nikto       │  Web server vulnerability scanning         │
-│  Gobuster    │  Directory & file enumeration              │
-└──────────────┴────────────────────────────────────────────┘
-```
-
----
-
-## Planned Improvements
-
-```
-  [ ]  ffuf integration
-  [ ]  whatweb integration
-  [ ]  httpx integration
-  [ ]  sslscan integration
-  [ ]  Better session history
-  [ ]  HTML report export
-  [ ]  Plugin-based scan modules
-  [ ]  Faster parallel scan execution
+  ◻  ffuf integration
+  ◻  httpx integration
+  ◻  whatweb integration
+  ◻  sslscan integration
+  ◻  HTML report export
+  ◻  Session history and comparison
+  ◻  Plugin system for additional scanners
+  ◻  Faster parallel execution
 ```
 
 ---
 
-## Contributing
+## `>` Contributing
 
 Contributions are welcome.
 
-If you want to contribute:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Open a pull request
+```
+  1  Fork the repository
+  2  Create a feature branch
+  3  Make your changes
+  4  Submit a pull request
+```
 
 Please keep contributions focused on **usability**, **reliability**, and **ethical security testing**.
 
 ---
 
-## Disclaimer
+## `>` License
+
+This project is licensed under the **MIT License**.
+
+---
+
+## `>` Disclaimer
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
-║  AKIRA is intended for authorized security testing,          ║
+║  rexa is intended for authorized security testing,          ║
 ║  learning, and defensive use only.                           ║
 ║                                                              ║
-║  Do not scan systems you do not own or have explicit         ║
-║  permission to test. Unauthorized scanning is illegal.       ║
+║  Do not scan systems you do not own or do not have           ║
+║  explicit permission to test.                                ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## Author
-
-**Pradhyuman Singh**  
-GitHub: [@0xprxdhx](https://github.com/0xprxdhx)
-
----
+<div align="center">
 
 ```
-[ AKIRA v1.0 ]  [ ETHICAL HACKING ONLY ]  [ STAY LEGAL ]
+made by  0xprxdhx  ·  Pradhyuman Singh
+github.com/0xprxdhx/rexa
 ```
+
+</div>

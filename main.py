@@ -59,7 +59,7 @@ def show_banner():
     console.print(
         Panel(
             Align.center(banner_text),
-            title="[bold cyan]AKIRA[/bold cyan]",
+            title="[bold cyan]rexa[/bold cyan]",
             subtitle="[dim]Guided recon and web assessment assistant[/dim]",
             border_style="green",
             box=DOUBLE,
@@ -71,7 +71,7 @@ def show_banner():
         Panel(
             f"Root mode is {status}.\n"
             f"• Use normal mode for safe scans.\n"
-            f"• Use sudo akira for SYN scan, OS detection, aggressive mode, and traceroute.\n"
+            f"• Use sudo rexa for SYN scan, OS detection, aggressive mode, and traceroute.\n"
             f"• Nikto and Gobuster work in both modes.",
             title="[bold cyan]Mode guidance[/bold cyan]",
             border_style="cyan",
@@ -86,7 +86,7 @@ def explain_tools():
             "Nmap discovers hosts, ports, services, and versions.\n"
             "Nikto checks web servers for missing headers and common misconfigurations.\n"
             "Gobuster enumerates hidden directories and files using a wordlist.",
-            title="[bold cyan]What AKIRA does[/bold cyan]",
+            title="[bold cyan]What rexa does[/bold cyan]",
             border_style="cyan",
             box=ROUNDED,
         )
@@ -292,7 +292,7 @@ def apply_root_rules(flags: List[str]) -> Tuple[List[str], List[str]]:
                 + ", ".join(sorted(set(removed)))
             )
             notes.append(
-                "Tip: use sudo akira to unlock the full Nmap feature set."
+                "Tip: use sudo rexa to unlock the full Nmap feature set."
             )
 
     if not cleaned:
@@ -737,7 +737,7 @@ def write_report(session: Dict):
     gobuster = session.get("gobuster", [])
 
     lines = [
-        "# AKIRA Report",
+        "# rexa Report",
         "",
         f"**Target:** {session.get('target', '-')}",
         f"**Profile:** {session.get('profile', '-')}",
